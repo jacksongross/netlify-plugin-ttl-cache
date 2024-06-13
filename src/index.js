@@ -1,4 +1,4 @@
-const { stat, unlink, rmdir } = require("fs").promises;
+const { stat, unlink, rm } = require("fs").promises;
 const { getDaysApart, getDirFilenames, addTrailingSlash } = require("./utils");
 
 const TMP_CACHE_DIR = ".netlify-plugin-ttl-cache";
@@ -38,7 +38,7 @@ const onPostBuild = async ({ utils, inputs }) => {
       addTrailingSlash(TMP_CACHE_DIR),
       addTrailingSlash(inputs.path),
     ]);
-    await rmdir(TMP_CACHE_DIR, { recursive: true });
+    await rm(TMP_CACHE_DIR, { recursive: true });
   }
 
   // Save new cache
